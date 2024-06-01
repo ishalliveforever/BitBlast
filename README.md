@@ -1,4 +1,4 @@
-# BitBlast Airdrop Tool Setup Using GitHub Codespaces
+# BitBlast Airdrop Tool
 
 ## Requirements
 Ensure all dependencies are installed by running the following command:
