@@ -1,3 +1,4 @@
+// Initialize the provider for Panda Wallet
 const initProvider = () => {
     if ('panda' in window) {
         const provider = window.panda;
@@ -8,6 +9,7 @@ const initProvider = () => {
     return null;
 };
 
+// Function to log in with Panda Wallet
 const loginWithPandaWallet = async () => {
     console.log("Attempting to log in with Panda Wallet...");
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -42,6 +44,7 @@ const loginWithPandaWallet = async () => {
     }
 };
 
+// Function to display wallet information
 const displayWalletInfo = (displayName, avatar, ordAddress) => {
     const profileContainer = document.getElementById('socialProfile');
     profileContainer.innerHTML = `
@@ -53,6 +56,7 @@ const displayWalletInfo = (displayName, avatar, ordAddress) => {
     document.getElementById('wallet-status').textContent = `Logged in with Ordinals Address: ${ordAddress}`;
 };
 
+// Function to enable the Airdrop button
 const enableAirdropButton = () => {
     const recipientGroups = document.querySelectorAll('.recipient-group');
     let valid = true;
@@ -73,6 +77,7 @@ const enableAirdropButton = () => {
     }
 };
 
+// Function to perform batch transfer of ordinals
 const performBatchTransfer = async () => {
     const wallet = initProvider();
     if (!wallet) {
@@ -81,7 +86,7 @@ const performBatchTransfer = async () => {
     }
 
     const recipientGroups = document.querySelectorAll('.recipient-group');
-    const transferParamsArray = [];
+    const transferRequests = [];
 
     recipientGroups.forEach(group => {
         const address = group.querySelector('.recipientWallet').value.trim();
@@ -91,21 +96,82 @@ const performBatchTransfer = async () => {
             origin: ordinalId,
             outpoint: ordinalId
         };
-        transferParamsArray.push(transferParams);
+        transferRequests.push(transferParams);
     });
 
     try {
-        for (const transferParams of transferParamsArray) {
+        const transactions = [];
+        for (const transferParams of transferRequests) {
             const txid = await wallet.transferOrdinal(transferParams);
+            transactions.push({
+                "recipient_wallet": transferParams.address,
+                "ordinal_id": transferParams.origin,
+                "transaction_id": txid
+            });
             console.log('Transaction ID:', txid);
         }
-        document.getElementById('result').innerText = 'Airdrop completed successfully.';
+        document.getElementById('result').innerText = 'Airdrop completed. Transaction IDs: ' + transactions.map(tx => tx.transaction_id).join(', ');
+        displayTransactions(transactions);
     } catch (err) {
         console.error('Error transferring ordinals:', err);
         document.getElementById('result').innerText = `Airdrop failed: ${err.message}`;
     }
 };
 
+// Function to display transactions and enable download button
+const displayTransactions = (transactions) => {
+    const transactionsContainer = document.getElementById('transactionsContainer');
+    transactionsContainer.innerHTML = '';
+    transactions.forEach(tx => {
+        const txElement = document.createElement('div');
+        txElement.classList.add('transaction');
+        txElement.innerHTML = `
+            <p>Recipient Wallet: ${tx.recipient_wallet}</p>
+            <p>Ordinal ID: ${tx.ordinal_id}</p>
+            <p>Transaction ID: ${tx.transaction_id}</p>
+            <button onclick="copyToClipboard('${tx.recipient_wallet}, ${tx.ordinal_id}, ${tx.transaction_id}')">Copy</button>
+        `;
+        transactionsContainer.appendChild(txElement);
+    });
+
+    // Enable download CSV button
+    document.getElementById('downloadCSVButton').style.display = 'block';
+    document.getElementById('downloadCSVButton').addEventListener('click', () => downloadCSV(transactions));
+};
+
+// Function to copy transaction details to clipboard
+const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard');
+    });
+};
+
+// Function to download transactions as CSV
+const downloadCSV = async (transactions) => {
+    const response = await fetch('/download_csv', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(transactions)
+    });
+
+    if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'transactions.csv';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    } else {
+        console.error('Failed to download CSV');
+    }
+};
+
+// Event listener for DOM content loaded
 document.addEventListener('DOMContentLoaded', () => {
     loginWithPandaWallet();
     document.getElementById('airdropButton').classList.remove('glow-on-hover');

@@ -9,17 +9,28 @@
 <body>
     <div class="container">
         <h1>BitBlast</h1>
+        <!-- Profile Box to display social profile info -->
         <div id="socialProfile" class="profile-box"></div>
+        <!-- Status message to show the wallet address logged in -->
         <p id="wallet-status">Logged in with Ordinals Address:</p>
+        <!-- Hidden input to store the wallet address -->
         <input type="hidden" id="walletAddress">
+        <!-- File input to upload JSON file -->
         <input type="file" id="jsonFile">
+        <!-- Button to trigger JSON file upload -->
         <button id="uploadJsonButton">Upload JSON</button>
+        <!-- Link to download an example JSON file -->
         <a href="/static/example.json" download>Download Example JSON</a>
+        <!-- Button to add recipient input fields manually -->
         <button id="addRecipientButton">Add Recipient</button>
+        <!-- Container to hold recipient input fields -->
         <div id="recipientsContainer"></div>
+        <!-- Button to trigger the airdrop process -->
         <button id="airdropButton" class="glow-on-hover" disabled>Airdrop</button>
+        <!-- Result message to display transaction IDs or errors -->
         <div id="result" class="result"></div>
     </div>
+    <!-- Including external JavaScript file -->
     <script src="/static/script.js"></script>
 </body>
 </html>

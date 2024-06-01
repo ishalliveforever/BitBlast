@@ -1,3 +1,4 @@
+/* Body styles for the entire page */
 body {
     font-family: Arial, sans-serif;
     background-color: #000000;
@@ -10,6 +11,7 @@ body {
     height: 100vh;
 }
 
+/* Container styles */
 .container {
     max-width: 600px;
     padding: 2px;
@@ -19,16 +21,19 @@ body {
     text-align: center;
 }
 
+/* Heading styles */
 h1 {
     margin-bottom: 20px;
     color: #333;
     font-size: 24px;
 }
 
+/* Paragraph styles */
 p {
     margin-bottom: 20px;
 }
 
+/* Input, button, and link styles */
 input[type="file"],
 input[type="text"],
 button,
@@ -45,6 +50,7 @@ a {
     cursor: pointer;
 }
 
+/* Hover styles for input, button, and link */
 input[type="file"]:hover,
 input[type="text"]:hover,
 button:hover,
@@ -52,40 +58,48 @@ a:hover {
     background-color: #d1d9e6;
 }
 
+/* Specific button styles */
 button {
     background-color: #e0e5ec;
     box-shadow: 5px 5px 10px #c3c7cf, -5px -5px 10px #ffffff;
 }
 
+/* Disabled button styles */
 button:disabled {
     background-color: #c3c7cf;
     color: #666;
 }
 
+/* Styles for glowing button on hover */
 button.glow-on-hover {
     background: linear-gradient(145deg, #007bff, #0056b3);
     color: #fff;
     box-shadow: 5px 5px 10px #a1a7ae, -5px -5px 10px #ffffff;
 }
 
+/* Remove recipient button styles */
 .removeRecipientButton {
     background-color: #ff4d4d;
     box-shadow: 5px 5px 10px #b33838, -5px -5px 10px #ff6666;
 }
 
+/* Hover styles for remove recipient button */
 .removeRecipientButton:hover {
     background-color: #cc0000;
 }
 
+/* Link styles */
 a {
     text-decoration: none;
     color: #007bff;
 }
 
+/* Hover styles for link */
 a:hover {
     text-decoration: underline;
 }
 
+/* Profile container styles */
 #profileContainer {
     position: absolute;
     top: 10px;
@@ -98,27 +112,35 @@ a:hover {
     padding: 10px;
     box-shadow: 9px 9px 16px #A3B1C6, -9px -9px 16px #FFFFFF;
 }
+
+/* Social profile container styles */
 #socialProfile {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+/* Social profile image styles */
 #socialProfile img {
     border-radius: 50%;
     width: 50px;
     height: 50px;
 }
+
+/* Social profile text styles */
 #socialProfile span {
     margin-top: 5px;
     font-size: 12px;
     color: #555;
 }
 
-
+/* Result message styles */
 #result {
     margin-top: 20px;
     color: #333;
 }
+
+/* Profile box styles */
 .profile-box {
     display: flex;
     justify-content: flex-end;
@@ -126,18 +148,21 @@ a:hover {
     margin-bottom: 10px;
 }
 
+/* Profile container styles */
 .profile {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Profile picture styles */
 .profile-pic {
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 
+/* Profile name styles */
 .profile-name {
     margin-top: 5px;
     font-size: 14px;
