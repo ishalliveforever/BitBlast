@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitcoinSV 1Sat Ordinals Airdrop Tool</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>BitBlast</h1>
+        <div id="socialProfile" class="profile-box"></div>
+        <p id="wallet-status">Logged in with Ordinals Address:</p>
+        <input type="hidden" id="walletAddress">
+        <input type="file" id="jsonFile">
+        <button id="uploadJsonButton">Upload JSON</button>
+        <a href="/static/example.json" download>Download Example JSON</a>
+        <button id="addRecipientButton">Add Recipient</button>
+        <div id="recipientsContainer"></div>
+        <button id="airdropButton" class="glow-on-hover" disabled>Airdrop</button>
+        <div id="result" class="result"></div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

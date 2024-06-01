@@ -1,0 +1,12 @@
+{
+    "recipients": [
+        {
+            "wallet_address": "recipient_wallet_1",
+            "ordinal_id": "ordinal_id_1"
+        },
+        {
+            "wallet_address": "recipient_wallet_2",
+            "ordinal_id": "ordinal_id_2"
+        }
+    ]
+}
