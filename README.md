@@ -1,4 +1,4 @@
-# BitBlast Airdrop Tool Setup Using GitHub Codespaces
+# BitBlast 1Sat Airdrop Tool 
 Donate: 1JPnXcwKoX1YUyXcxEAXLmHdDDW4hiWnt6
 
 ## Requirements
